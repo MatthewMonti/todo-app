@@ -5,3 +5,5 @@ while not exit:
 
     if command.startswith("exit"):
         exit = True
+    else:
+        print("Command not recognized")
