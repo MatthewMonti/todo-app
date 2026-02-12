@@ -24,11 +24,7 @@ while not exit:
         ## int converts string to number
         print(f"Deleting task: {argument}")
     elif command.startswith("list"):
-        index = 0
-        for todo_item in TO_DO_LIST:
-            index+=1
-            print(f"{index}. {todo_item}")
         for index, item in enumerate(TO_DO_LIST):
-            print(f"{index}: {item}")
+            print(f"{index+1}: {item}")
     else:
         print("Command not recognized")
