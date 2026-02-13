@@ -5,26 +5,36 @@ TO_DO_LIST = []
 def get_argument(command):
     command_name, argument = command.split(" ", maxsplit=1)
     return argument 
+
+
+def handle_add_command(TO_DO_LIST, get_argument, command):
+    argument = get_argument(command)
+    TO_DO_LIST.append(argument)
+    print(f"Adding task: {argument}")
+
+def handle_delete_command(TO_DO_LIST, get_argument, command):
+    argument = get_argument(command)
+    TO_DO_LIST.pop(int(argument) -1)
+    print(f"Deleting task: {argument}")
+
+def handle_list_command(TO_DO_LIST):
+    for index, item in enumerate(TO_DO_LIST):
+        print(f"{index+1}: {item}")
+
 while not exit:
     command = input("Enter command: ")
 
     if command.startswith("exit"):
         exit = True
     elif command.startswith("add"):
-        # add task
-        argument = get_argument(command)
-        TO_DO_LIST.append(argument)
-        print(f"Adding task: {argument}")
+        handle_add_command(TO_DO_LIST, get_argument, command)
     elif command.startswith("delete"):
-        # delete task
-        argument = get_argument(command)
-        # specific pop over del (accident whole list) or remove (less specific)
-        ## integer convert string to number - 1 (index value minus 1)
-        TO_DO_LIST.pop(int(argument) -1)
-        ## int converts string to number
-        print(f"Deleting task: {argument}")
+        handle_delete_command(TO_DO_LIST, get_argument, command)
+        # NOTE: 
+        # User input is always a string, so the delete command receives the index as a # numeric string (e.g., "3"). We convert that numeric string to an integer using # int(argument) so we can delete the correct item by its index. 
+        # This matters because list values can repeat (e.g., two "walk" tasks), but 
+        # indexes are unique. Deleting by index ensures we remove the exact item the # user intended, not just the first or last matching value.
     elif command.startswith("list"):
-        for index, item in enumerate(TO_DO_LIST):
-            print(f"{index+1}: {item}")
+        handle_list_command(TO_DO_LIST)
     else:
         print("Command not recognized")
