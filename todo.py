@@ -28,6 +28,14 @@ def handle_save_command(command):
         for i in TO_DO_LIST:
             f.write(f'{i}\n')
 
+def handle_open_command(command):
+    # Read a list of todo items from a file
+    filename = get_argument(command)
+    filename += ".todo.txt"
+
+    with open(filename, "r") as f:
+        for line in f:
+            TO_DO_LIST.append(line.strip())
 
 while not exit:
     command = input("Enter command: ")
