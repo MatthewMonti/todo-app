@@ -10,12 +10,16 @@ def get_argument(command):
 def handle_add_command(command):
     argument = get_argument(command)
     TO_DO_LIST.append(argument)
-    print(f"Adding task: {argument}")
+    
+    print(f"Updated List:")
+    handle_list_command()
 
 def handle_delete_command(command):
     argument = get_argument(command)
     TO_DO_LIST.pop(int(argument) -1)
-    print(f"Deleting task: {argument}")
+    
+    print(f"Updated List:")
+    handle_list_command()
 
 def handle_list_command():
     for index, item in enumerate(TO_DO_LIST):
