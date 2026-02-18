@@ -21,6 +21,14 @@ def handle_list_command():
     for index, item in enumerate(TO_DO_LIST):
         print(f"{index+1}: {item}")
 
+def handle_save_command(command):
+    filename = get_argument(command)
+    filename += ".todo.txt"
+    with open(filename, 'w') as f:
+        for i in TO_DO_LIST:
+            f.write(f'{i}\n')
+
+
 while not exit:
     command = input("Enter command: ")
 
@@ -36,5 +44,9 @@ while not exit:
         # indexes are unique. Deleting by index ensures we remove the exact item the # user intended, not just the first or last matching value.
     elif command.startswith("list"):
         handle_list_command()
+    elif command.startswith("save"):
+        handle_save_command(command)
+    elif command.startswith("open"):
+        handle_open_command(command)
     else:
         print("Command not recognized")
