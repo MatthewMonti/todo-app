@@ -41,8 +41,8 @@ def handle_open_command(command):
         for line in f:
             TO_DO_LIST.append(line.strip())
 
-while not exit:
-    command = input("Enter command: ")
+def process_command(command):
+    exit = False
 
     if command.startswith("exit"):
         exit = True
@@ -50,15 +50,17 @@ while not exit:
         handle_add_command(command)
     elif command.startswith("delete"):
         handle_delete_command(command)
-        # NOTE: 
-        # User input is always a string, so the delete command receives the index as a # numeric string (e.g., "3"). We convert that numeric string to an integer using # int(argument) so we can delete the correct item by its index. 
-        # This matters because list values can repeat (e.g., two "walk" tasks), but 
-        # indexes are unique. Deleting by index ensures we remove the exact item the # user intended, not just the first or last matching value.
-    elif command.startswith("list"):
+    elif command.startwith("list"):
         handle_list_command()
-    elif command.startswith("save"):
-        handle_save_command(command)
     elif command.startswith("open"):
         handle_open_command(command)
+    elif command.startwith("save"):
+        handle_save_command(command)
     else:
         print("Command not recognized")
+    
+    return exit
+
+while not exit:
+    command = input("Enter command: ")
+    exit = process_command(command)
