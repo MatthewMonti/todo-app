@@ -54,7 +54,7 @@ def process_command(command):
         handle_list_command()
     elif command.startswith("open"):
         handle_open_command(command)
-    elif command.startwith("save"):
+    elif command.startswith("save"):
         handle_save_command(command)
     else:
         print("Command not recognized")
@@ -63,4 +63,4 @@ def process_command(command):
 
 while not exit:
     command = input("Enter command: ")
-    exit = process_command(command)
+    exit = process_command
