@@ -1,5 +1,5 @@
 exit = False
-
+filename = None
 TO_DO_LIST = []
 
 def get_argument(command):
@@ -26,6 +26,7 @@ def handle_list_command():
         print(f"{index+1}: {item}")
 
 def handle_save_command(command):
+    global filename
     filename = get_argument(command)
     filename += ".todo.txt"
     with open(filename, 'w') as f:
@@ -33,6 +34,7 @@ def handle_save_command(command):
             f.write(f'{i}\n')
 
 def handle_open_command(command):
+    global filename
     # Read a list of todo items from a file
     filename = get_argument(command)
     filename += ".todo.txt"
@@ -42,6 +44,7 @@ def handle_open_command(command):
             TO_DO_LIST.append(line.strip())
 
 def process_command(command):
+    global filename
     exit = False
 
     if command.startswith("exit"):
@@ -58,6 +61,9 @@ def process_command(command):
         handle_save_command(command)
     else:
         print("Command not recognized")
+    if exit and filename:
+        handle_save_command(f"save {filename}")
+        print(f"Saved tasks to file {filename} before exiting.")
     
     return exit
 
