@@ -69,4 +69,4 @@ def process_command(command):
 
 while not exit:
     command = input("Enter command: ")
-    exit = process_command
+    exit = process_command(command)
