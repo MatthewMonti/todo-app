@@ -53,7 +53,7 @@ def process_command(command):
         handle_add_command(command)
     elif command.startswith("delete"):
         handle_delete_command(command)
-    elif command.startstwith("list"):
+    elif command.startswith("list"):
         handle_list_command()
     elif command.startswith("open"):
         handle_open_command(command)
