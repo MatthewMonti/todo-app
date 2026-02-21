@@ -56,7 +56,8 @@ def process_command(command):
     elif command.startswith("list"):
         handle_list_command()
     elif command.startswith("open"):
-        handle_open_command(command)
+        if len(TO_DO_LIST) > 0:
+            print("There are existing todo items. Do you want to clear them?")
     elif command.startswith("save"):
         handle_save_command(command)
     else:
