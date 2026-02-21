@@ -28,18 +28,18 @@ def handle_list_command():
 def handle_save_command(command):
     global filename
     filename = get_argument(command)
-    filename += ".todo.txt"
-    with open(filename, 'w') as f:
+    with open(get_filename(filename), 'w') as f:
         for i in TO_DO_LIST:
             f.write(f'{i}\n')
+
+def get_filename(filename):
+    return filename + ".todo.txt"
 
 def handle_open_command(command):
     global filename
     # Read a list of todo items from a file
     filename = get_argument(command)
-    filename += ".todo.txt"
-
-    with open(filename, "r") as f:
+    with open(get_filename(filename), "r") as f:
         for line in f:
             TO_DO_LIST.append(line.strip())
 
