@@ -1,3 +1,5 @@
+import sys
+
 exit = False
 filename = None
 TO_DO_LIST = []
@@ -80,6 +82,11 @@ def process_command(command):
     if exit and filename:
         handle_save_command(f"save {filename}")
         print(f"Saved tasks to file {filename} before exiting.")
+    
+    if len(sys.argv)> 1:
+        filename = sys.argv[1]
+        handle_open_command(f"open {filename}")
+        handle_list_command()
     
     return exit
 
