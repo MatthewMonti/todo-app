@@ -58,7 +58,8 @@ def process_command(command):
     elif command.startswith("list"):
         handle_list_command()
     elif command.startswith("open"):
-        if len(TO_DO_LIST) > 0:
+        handle_open_command(command)
+        if len(TO_DO_LIST) > 1:
             while True: 
                 print("There are existing todo items. Do you want to clear them? (y/n)")
                 answer = input().lower().strip()
