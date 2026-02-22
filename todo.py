@@ -57,7 +57,22 @@ def process_command(command):
         handle_list_command()
     elif command.startswith("open"):
         if len(TO_DO_LIST) > 0:
-            print("There are existing todo items. Do you want to clear them?")
+            while True: 
+                print("There are existing todo items. Do you want to clear them? (y/n)")
+                answer = input().lower().strip()
+
+                if answer == "y":
+                    print("clearing existing todo items")
+                    TO_DO_LIST.clear()
+                    handle_list_command()
+                    break
+                elif answer == "n":
+                    print(f"{filename} file updated with new todo items")
+                    handle_open_command(command)
+                    handle_list_command()
+                    break
+                else:
+                    print(f"Invalid input: '{answer}'. Please enter 'y' or 'n'.")
     elif command.startswith("save"):
         handle_save_command(command)
     else:
