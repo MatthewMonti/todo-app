@@ -4,17 +4,24 @@ exit = False
 filename = None
 TO_DO_LIST = []
 
-def get_argument(command):
-    command_name, argument = command.split(" ", maxsplit=1)
-    return argument 
+def get_argument(command): 
+    parts = command.split(" ", maxsplit=1) 
+
+    if parts[0] != "add": 
+        return None # No argument provided 
+    return parts[1]
 
 
-def handle_add_command(command):
-    argument = get_argument(command)
-    TO_DO_LIST.append(argument)
-    
-    print(f"Updated List:")
-    handle_list_command()
+def handle_add_command(command): 
+    argument = get_argument(command) 
+    if argument is None: 
+        print("Error: 'add' requires an argument.") 
+        return
+    if argument:
+        print(f"Adding task: {argument}")
+        TO_DO_LIST.append(argument)
+    else:
+        print("No task provided. Please provide a task.")
 
 def handle_delete_command(command):
     argument = get_argument(command)
@@ -26,6 +33,9 @@ def handle_delete_command(command):
 def handle_list_command():
     for index, item in enumerate(TO_DO_LIST):
         print(f"{index+1}: {item}")
+
+class handle_typo(Exception):
+    handle_list_command()
 
 def handle_save_command(command):
     global filename
@@ -39,11 +49,17 @@ def get_filename(filename):
 
 def handle_open_command(command):
     global filename
-    # Read a list of todo items from a file
     filename = get_argument(command)
-    with open(get_filename(filename), "r") as f:
-        for line in f:
-            TO_DO_LIST.append(line.strip())
+    
+    if filename:
+        try:
+            with open(get_filename(filename), "r") as file:
+                for line in file:
+                   TO_DO_LIST.append(line.strip())
+        except FileNotFoundError:
+            print(f"File {get_filename(filename)} does not exist.")
+    else:
+        print("No filename provided.")
 
 def process_command(command):
     global filename
