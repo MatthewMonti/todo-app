@@ -43,11 +43,15 @@ def handle_delete_command(command):
         if part[0].strip() == "delete" and part[1].strip() == "":
             print("Assign todo item number integer before deleting todo item")
             return 
-        if part[0].strip() != "add" and part[1].strip() == "":
-                print('Check spelling of add command')
-                return 
+        if part[0].strip() != "delete" and part[1].strip() == "":
+            print('Check spelling of add command')
+            return 
         
-        if part[0].strip() == "add" and part[1].strip() == "":
+        if part[0].strip() == "delete" and type(part[1].strip()) != int:
+            print('For proper deletion use todo item number not name')
+            return 
+        
+        if part[0] == "delete" and int(part[1]):
             argument = get_argument(command)
             TO_DO_LIST.pop(int(argument) -1)
             print(f"Updated List:")
@@ -56,6 +60,7 @@ def handle_delete_command(command):
         return argument
     except ValueError:
         print("Seperate command from todo item")
+        return
 
 def handle_list_command():
     for index, item in enumerate(TO_DO_LIST):
