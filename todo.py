@@ -4,31 +4,58 @@ exit = False
 filename = None
 TO_DO_LIST = []
 
-def get_argument(command): 
-    parts = command.split(" ", maxsplit=1) 
-
-    if parts[0] != "add": 
-        return None # No argument provided 
-    return parts[1]
-
+def get_argument(command):
+    command_name, argument = command.split(" ", maxsplit=1)
+    return argument
 
 def handle_add_command(command): 
-    argument = get_argument(command) 
-    if argument is None: 
-        print("Error: 'add' requires an argument.") 
-        return
-    if argument:
-        print(f"Adding task: {argument}")
-        TO_DO_LIST.append(argument)
-    else:
-        print("No task provided. Please provide a task.")
+    try:
+        command_name, argument = command.split(" ", maxsplit =1)
+        part = command_name, argument
+        if part[0].strip() != "add" and part[1].strip():
+            print('Check spelling of add command')
+            return 
+        if  part[0]== "add" and part[1].strip() == "":
+            print('Assign todo item before adding todo item')
+            return
+        if part[0].strip() != "add" and part[1].strip() == "":
+            print('Check spelling of add command')
+            return 
 
-def handle_delete_command(command):
-    argument = get_argument(command)
-    TO_DO_LIST.pop(int(argument) -1)
+        if part[0] == "add" and part[1]:
+            print(f"Adding task: {argument}")
+            TO_DO_LIST.append(argument)
+            handle_list_command()
+            return 
+        return argument 
     
-    print(f"Updated List:")
-    handle_list_command()
+    except ValueError:
+        print("Seperate command from todo item")
+        return
+    
+def handle_delete_command(command):
+    try: 
+        command_name, argument = command.split(" ", maxsplit =1)
+        part = command_name, argument
+        if part[0]!="delete" and part[1].strip():
+            print("Check spelling of delete command")
+            return 
+        if part[0].strip() == "delete" and part[1].strip() == "":
+            print("Assign todo item number integer before deleting todo item")
+            return 
+        if part[0].strip() != "add" and part[1].strip() == "":
+                print('Check spelling of add command')
+                return 
+        
+        if part[0].strip() == "add" and part[1].strip() == "":
+            argument = get_argument(command)
+            TO_DO_LIST.pop(int(argument) -1)
+            print(f"Updated List:")
+            handle_list_command()
+            return
+        return argument
+    except ValueError:
+        print("Seperate command from todo item")
 
 def handle_list_command():
     for index, item in enumerate(TO_DO_LIST):
