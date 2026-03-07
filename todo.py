@@ -16,7 +16,7 @@ def handle_add_command(command):
             print("add command must be seperated from todo item name")
             return 
         if  part[0]== "add" and part[1].strip() == "":
-            print('Assign todo item before adding todo item')
+            print('Forgot to assign todo item after add command')
             return
         if part[0].strip() != "add" and part[1].strip() == "":
             print("'add' command is not spelled right 02")
@@ -37,7 +37,7 @@ def handle_add_command(command):
 
         # print(parts[0])
         if parts and parts[0] in valid_command:
-            print("Forgot to assign todo item")
+            print("Forgot to assign todo item after 'add command")
             return
         elif parts and parts[0] not in valid_space:
             print("only 'add' command is valid for inserting new todo itemsß")
