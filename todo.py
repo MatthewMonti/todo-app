@@ -53,7 +53,7 @@ def handle_remove_command(command):
                 TO_DO_LIST.pop(num - 1)
                 handle_list_command()
             except IndexError:
-                print("Invalid index")
+                print("Outside scope of list or already removed")
     except ValueError:
         print("Command not recognized")
         print("Type 'help' to see available command")
