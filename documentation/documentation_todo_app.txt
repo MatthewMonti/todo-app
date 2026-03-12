@@ -7,6 +7,4 @@ open = open command for opening filename typed
 save = save command for saving filename typed
 exit = closes todo program
 help = help access app support documentation
-y = yes proceed with action 
-n = no cancel action
 remove = remove filename
