@@ -92,7 +92,7 @@ def handle_save_command(command):
         name = get_command_name(command)
         if name == "save" and filename.strip() == "":
             print("Forgot to assign filename to save")
-        elif name == "save" and filename:
+        elif name == "save" and filename != "None":
             with open(get_filename(filename), 'w') as f:
                 for i in TO_DO_LIST:
                     f.write(f'{i}\n')
@@ -150,7 +150,11 @@ def process_command(command):
     exit = False
 
     if command.startswith("exit"):
-        exit = True
+        if filename == None:
+            print("SaveAs filename before exiting")
+        else: 
+            filename
+            exit = True
     elif command.startswith("add"):
         handle_add_command(command)
     elif command.startswith("remove"):
