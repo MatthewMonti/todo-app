@@ -1,0 +1,12 @@
+The commands used in todo application are followed:
+
+add = add task to todo list 
+delete = delete task form todo list
+list = list command for printing todo list
+open = open command for opening filename typed
+save = save command for saving filename typed
+exit = closes todo program
+help = help access app support documentation
+y = yes proceed with action 
+n = no cancel action
+remove = remove filename
