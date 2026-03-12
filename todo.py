@@ -92,7 +92,7 @@ def handle_save_command(command):
         name = get_command_name(command)
         if name == "save" and filename.strip() == "":
             print("Forgot to assign filename to save")
-        elif name == "save" and filename != "None":
+        elif name == "save" and filename != None:
             with open(get_filename(filename), 'w') as f:
                 for i in TO_DO_LIST:
                     f.write(f'{i}\n')
@@ -151,10 +151,21 @@ def process_command(command):
 
     if command.startswith("exit"):
         if filename == None:
-            print("SaveAs filename before exiting")
-        else: 
-            filename
-            exit = True
+            print("Forgot to SaveAs a filename do you want to exit (y/n)")
+            while True:
+                answer = input()
+                if answer.lower() == "y":
+                    exit = True
+                    break
+                elif answer.lower() == "n":
+                    exit = False
+                    break
+                else:
+                     print(f"Invalid input: Please enter (y/n) to exit.")
+        else:
+            filename != None
+            handle_save_command(f"save {filename}")
+            print(f"Saved tasks to file {filename} before exiting.")
     elif command.startswith("add"):
         handle_add_command(command)
     elif command.startswith("remove"):
@@ -240,10 +251,6 @@ def process_command(command):
     else:
         print("Command not recognized")
         print("Type 'help' to see available command")
-
-    if exit:
-        handle_save_command(f"save {filename}")
-        print(f"Saved tasks to file {filename} before exiting.")
     
     if len(sys.argv)> 1:
         filename = sys.argv[1]
