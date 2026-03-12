@@ -159,7 +159,7 @@ def process_command(command):
         if command == "list":
             handle_list_command()
         elif command != "list":
-            print("Invalid command")
+            print("Command not recognized")
     elif command.startswith("open"):
         if len(TO_DO_LIST) == 0:
             handle_open_command(command)
